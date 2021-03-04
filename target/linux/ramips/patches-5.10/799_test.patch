@@ -1,0 +1,23 @@
+diff --git a/drivers/net/ethernet/mediatek/mtk_ppe.c b/drivers/net/ethernet/mediatek/mtk_ppe.c
+index df77b71020c8..c126a39c4ae8 100644
+--- a/drivers/net/ethernet/mediatek/mtk_ppe.c
++++ b/drivers/net/ethernet/mediatek/mtk_ppe.c
+@@ -153,7 +153,8 @@ int mtk_foe_entry_prepare(struct mtk_foe_entry *entry, int type, int l4proto,
+ 	      FIELD_PREP(MTK_FOE_IB1_PACKET_TYPE, type) |
+ 	      FIELD_PREP(MTK_FOE_IB1_UDP, l4proto == IPPROTO_UDP) |
+ 	      MTK_FOE_IB1_BIND_TTL |
+-	      MTK_FOE_IB1_BIND_CACHE;
++	      MTK_FOE_IB1_BIND_CACHE |
++	      MTK_FOE_IB1_BIND_KEEPALIVE;
+ 	entry->ib1 = val;
+ 
+ 	val = FIELD_PREP(MTK_FOE_IB2_PORT_MG, 0x3f) |
+@@ -424,7 +425,7 @@ int mtk_ppe_start(struct mtk_ppe *ppe)
+ 	      FIELD_PREP(MTK_PPE_TB_CFG_SEARCH_MISS,
+ 			 MTK_PPE_SEARCH_MISS_ACTION_FORWARD_BUILD) |
+ 	      FIELD_PREP(MTK_PPE_TB_CFG_KEEPALIVE,
+-			 MTK_PPE_KEEPALIVE_DISABLE) |
++			 MTK_PPE_KEEPALIVE_DUP_CPU) |
+ 	      FIELD_PREP(MTK_PPE_TB_CFG_HASH_MODE, 1) |
+ 	      FIELD_PREP(MTK_PPE_TB_CFG_SCAN_MODE,
+ 			 MTK_PPE_SCAN_MODE_KEEPALIVE_AGE) |
